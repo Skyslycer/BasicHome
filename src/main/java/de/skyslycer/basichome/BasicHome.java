@@ -40,8 +40,8 @@ public class BasicHome extends JavaPlugin {
                 Files.createFile(jsonFile);
             }
 
-            var gson = new GsonBuilder().create();
-            return gson.fromJson(Files.readString(jsonFile), Players.class); // Gson#fromJson loads the player data from Json and Files.readString reads it
+            var players = new Gson().fromJson(Files.readString(jsonFile), Players.class); // Gson#fromJson loads the player data from Json and Files.readString reads it
+            return (players == null ? new Players() : players);
         } catch (IOException | JsonSyntaxException exception) {
             this.getLogger().warning("Couldn't load player homes! Please check the stacktrace below:");
             exception.printStackTrace();
