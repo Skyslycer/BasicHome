@@ -5,7 +5,7 @@ import com.google.gson.JsonSyntaxException;
 import de.skyslycer.basichome.commands.DeleteHomeCommand;
 import de.skyslycer.basichome.commands.HomeCommand;
 import de.skyslycer.basichome.commands.SetHomeCommand;
-import de.skyslycer.basichome.serialization.PlayerData;
+import de.skyslycer.basichome.serialization.Players;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class BasicHome extends JavaPlugin {
     private static final Path dataFolder = Path.of("plugins", "BasicHome");
     private static final Path jsonFile = dataFolder.resolve("players.json");
 
-    private PlayerData playerData;
+    private Players playerData;
 
     @Override
     public void onEnable() {
@@ -33,7 +33,7 @@ public class BasicHome extends JavaPlugin {
         save();
     }
 
-    private PlayerData load() { // Loads the data
+    private Players load() { // Loads the data
         try {
             if (!Files.exists(jsonFile)) {
                 Files.createDirectories(jsonFile.getParent());
@@ -41,7 +41,7 @@ public class BasicHome extends JavaPlugin {
             }
 
             var gson = new GsonBuilder().create();
-            return gson.fromJson(Files.readString(jsonFile), PlayerData.class); // Gson#fromJson loads the player data from Json and Files.readString reads it
+            return gson.fromJson(Files.readString(jsonFile), Players.class); // Gson#fromJson loads the player data from Json and Files.readString reads it
         } catch (IOException | JsonSyntaxException exception) {
             this.getLogger().warning("Couldn't load player homes! Please check the stacktrace below:");
             exception.printStackTrace();
@@ -64,7 +64,7 @@ public class BasicHome extends JavaPlugin {
         }
     }
 
-    public PlayerData getPlayerData() {
+    public Players getPlayerData() {
         return playerData;
     }
 

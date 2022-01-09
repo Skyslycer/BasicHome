@@ -40,7 +40,7 @@ public class HomeCommand implements CommandExecutor {
             return false;
         }
 
-        player.teleport(homeData.get(homeName));
+        player.teleport(homeData.get(homeName).getLocation());
         player.sendMessage(ChatColor.GREEN + "You have been successfully teleported to: " + ChatColor.GOLD + homeName);
         return true;
     }
