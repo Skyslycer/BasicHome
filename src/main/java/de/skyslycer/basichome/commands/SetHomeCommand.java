@@ -3,6 +3,7 @@ package de.skyslycer.basichome.commands;
 import de.skyslycer.basichome.BasicHome;
 import de.skyslycer.basichome.serialization.Home;
 import de.skyslycer.basichome.serialization.Homes;
+import de.skyslycer.basichome.serialization.SerializableLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -47,7 +48,7 @@ public class SetHomeCommand implements CommandExecutor {
             return false;
         }
 
-        homeData.put(homeName, new Home(player.getLocation(), true));
+        homeData.put(homeName, new Home(SerializableLocation.fromPlayer(player), false));
         player.sendMessage(ChatColor.GREEN + "You successfully create a home named: " + ChatColor.GOLD + homeName);
 
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, plugin::save, 0L);

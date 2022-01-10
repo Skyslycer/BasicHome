@@ -4,15 +4,15 @@ import org.bukkit.Location;
 
 public class Home {
 
-    private final Location location;
+    private final SerializableLocation location;
     private final boolean publicHome;
 
-    public Home(Location location, boolean publicHome) {
+    public Home(SerializableLocation location, boolean publicHome) {
         this.location = location;
         this.publicHome = publicHome;
     }
 
-    public Location getLocation() {
+    public SerializableLocation getLocation() {
         return location;
     }
 

@@ -35,12 +35,12 @@ public class HomeCommand implements CommandExecutor {
         var homeName = args[0];
         var homeData = plugin.getPlayerData().get(player.getUniqueId());
 
-        if (homeData == null || homeData.get(homeName) == null) {
+        if (homeData == null || homeData.get(homeName) == null || homeData.get(homeName).getLocation().toBukkitLocation() == null) {
             sender.sendMessage(ChatColor.RED + "This home does not exist!");
             return false;
         }
 
-        player.teleport(homeData.get(homeName).getLocation());
+        player.teleport(homeData.get(homeName).getLocation().toBukkitLocation());
         player.sendMessage(ChatColor.GREEN + "You have been successfully teleported to: " + ChatColor.GOLD + homeName);
         return true;
     }
